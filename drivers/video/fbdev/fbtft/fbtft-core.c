@@ -907,7 +907,7 @@ static int fbtft_init_display_from_property(struct fbtft_par *par)
 	u32 *values;
 	u32 val;
 
-	count = device_property_count_u32(dev, "init");
+	count = device_property_read_u32(dev, "init");
 	if (count < 0)
 		return count;
 	if (count == 0)
