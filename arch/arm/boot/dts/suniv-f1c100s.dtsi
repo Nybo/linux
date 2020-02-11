@@ -12,6 +12,12 @@
 	#size-cells = <1>;
 	interrupt-parent = <&intc>;
 
+	aliases {
+		myspi1 = &spi1;
+	};
+
+
+
 	clocks {
 		osc24M: clk-24M {
 			#clock-cells = <0>;
