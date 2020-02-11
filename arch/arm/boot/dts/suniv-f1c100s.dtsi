@@ -12,9 +12,6 @@
 	#size-cells = <1>;
 	interrupt-parent = <&intc>;
 
-	aliases {
-		myspi1 = &spi1;
-	};
 
 
 
@@ -90,7 +87,7 @@
 			#size-cells = <0>;
 		};
 
-		spi1: spi@1c06000 {
+		dispspi: spi@1c06000 {
 			compatible = "allwinner,suniv-f1c100s-spi",
 				     "allwinner,sun8i-h3-spi";
 			reg = <0x01c06000 0x1000>;
