@@ -231,7 +231,7 @@ static int blank(struct fbtft_par *par, bool on)
 static struct fbtft_display display = {
 	.regwidth = 8,
 	.width = 240,
-	.height = 320,
+	.height = 240,
 	.gamma_num = 2,
 	.gamma_len = 14,
 	.gamma = DEFAULT_GAMMA,
