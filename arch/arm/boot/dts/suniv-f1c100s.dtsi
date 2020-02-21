@@ -215,6 +215,15 @@
 				function = "spi1";
 			};
 
+			lcd_rgb666_pins: lcd-rgb666-pins {
+				pins = "PD0", "PD1", "PD2", "PD3", "PD4",
+				       "PD5", "PD6", "PD7", "PD8", "PD9",
+				       "PD10", "PD11", "PD12", "PD13", "PD14",
+				       "PD15", "PD16", "PD17", "PD18", "PD19",
+				       "PD20", "PD21";
+				function = "lcd";
+			};
+
 			uart0_pe_pins: uart0-pe-pins {
 				pins = "PE0", "PE1";
 				function = "uart0";
