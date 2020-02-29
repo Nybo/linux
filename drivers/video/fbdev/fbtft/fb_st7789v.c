@@ -53,6 +53,8 @@ enum st7789v_command {
 	PWCTRL1 = 0xD0,
 	PVGAMCTRL = 0xE0,
 	NVGAMCTRL = 0xE1,
+	INVON = 0x21,
+	INVOFF = 0x20,
 };
 
 #define MADCTL_BGR BIT(3) /* bitmask for RGB/BGR order */
@@ -118,6 +120,8 @@ static int init_display(struct fbtft_par *par)
 	 * VDS = 2.3V
 	 */
 	write_reg(par, PWCTRL1, 0xA4, 0xA1);
+
+	write_reg(par, INVOFF;
 
 	write_reg(par, MIPI_DCS_SET_DISPLAY_ON);
 	return 0;
