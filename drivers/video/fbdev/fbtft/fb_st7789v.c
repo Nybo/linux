@@ -121,7 +121,7 @@ static int init_display(struct fbtft_par *par)
 	 */
 	write_reg(par, PWCTRL1, 0xA4, 0xA1);
 
-	write_reg(par, INVOFF);
+	write_reg(par, INVON);
 
 	write_reg(par, MIPI_DCS_SET_DISPLAY_ON);
 	return 0;
