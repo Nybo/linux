@@ -300,8 +300,7 @@
 			interrupts = <21>;
 			clocks = <&ccu CLK_BUS_CODEC>, <&ccu CLK_CODEC>;
 			clock-names = "apb", "codec";
-			dmas = <&dma SUN4I_DMA_NORMAL 12>,
-			       <&dma SUN4I_DMA_NORMAL 12>;
+			dmas = <&dma SUN4I_DMA_NORMAL 12>, <&dma SUN4I_DMA_NORMAL 12>;
 			dma-names = "rx", "tx";
 			resets = <&ccu RST_BUS_CODEC>;
 			status = "disabled";
