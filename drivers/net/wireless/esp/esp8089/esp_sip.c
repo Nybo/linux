@@ -28,7 +28,6 @@
 #include <linux/mmc/sdio.h>
 #include <linux/mmc/sd.h>
 #include <linux/completion.h>
-#include <linux/timer.h>
 
 #include "esp_mac80211.h"
 #include "esp_pub.h"
@@ -218,17 +217,9 @@ static bool check_ac_tid(u8 * pkt, u8 ac, u8 tid)
 	return false;
 }
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0))
-static void sip_recalc_credit_timeout(struct timer_list *t)
-#else
 static void sip_recalc_credit_timeout(unsigned long data)
-#endif
 {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0))
-	struct esp_sip *sip = from_timer(sip, t, credit_timer);
-#else
 	struct esp_sip *sip = (struct esp_sip *) data;
-#endif
 
 	esp_dbg(ESP_DBG_ERROR, "rct");
 
@@ -239,13 +230,9 @@ static void sip_recalc_credit_init(struct esp_sip *sip)
 {
 	atomic_set(&sip->credit_status, RECALC_CREDIT_DISABLE);	//set it disable
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0))
-	timer_setup(&sip->credit_timer, sip_recalc_credit_timeout, 0);
-#else
 	init_timer(&sip->credit_timer);
 	sip->credit_timer.data = (unsigned long) sip;
 	sip->credit_timer.function = sip_recalc_credit_timeout;
-#endif
 }
 
 static int sip_recalc_credit_claim(struct esp_sip *sip, int force)
@@ -1663,18 +1650,10 @@ static int sip_parse_mac_rx_info(struct esp_sip *sip,
 	rx_status->band = NL80211_BAND_2GHZ;
 	rx_status->flag = RX_FLAG_DECRYPTED | RX_FLAG_MMIC_STRIPPED;
 	if (mac_ctrl->sig_mode) {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0))
-		rx_status->encoding = RX_ENC_HT;
-#else
 		rx_status->flag |= RX_FLAG_HT;
-#endif
 		rx_status->rate_idx = mac_ctrl->MCS;
 		if (mac_ctrl->SGI)
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0))
-			rx_status->enc_flags |= RX_ENC_FLAG_SHORT_GI;
-#else
 			rx_status->flag |= RX_FLAG_SHORT_GI;
-#endif
 	} else {
 		rx_status->rate_idx = esp_wmac_rate2idx(mac_ctrl->rate);
 	}

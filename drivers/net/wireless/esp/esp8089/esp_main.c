@@ -188,6 +188,8 @@ static int esp_download_fw(struct esp_pub *epub)
 	struct esp_fw_blk_hdr *bhdr = NULL;
 	struct sip_cmd_bootup bootcmd;
 	char *esp_fw_name;
+    
+    esp_dbg(ESP_DBG_TRACE, "In esp_download_fw function !!!!!!!!!!!!!!!!!!!!!!!!! \n");
 
 	if (sif_get_ate_config() == 1) {
 		esp_fw_name = ESP_FW_NAME3;
